@@ -6,6 +6,8 @@ const nextConfig = {
   images: {
     unoptimized: true, // GitHub Pages'ta Image Optimization çalışmaz, bunu kapatmalıyız
   },
+  basePath: '/cv', 
+  assetPrefix: '/cv',
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 };
