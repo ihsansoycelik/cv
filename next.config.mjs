@@ -8,6 +8,7 @@ const nextConfig = {
   },
   basePath: '/cv', 
   assetPrefix: '/cv',
+  trailingSlash: true,
   reactStrictMode: true,
   pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdx'],
 };
