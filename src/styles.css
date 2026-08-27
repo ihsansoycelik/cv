@@ -1,0 +1,80 @@
+@import "tailwindcss" source(none);
+@source "../src";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design tokens. Only the tokens actually consumed by the app live here — add
+ * a new pair (root + .dark) plus a `--color-<name>: var(--<name>)` mapping
+ * inside @theme inline below when you reach for `bg-<name>` / `text-<name>`.
+ */
+
+@theme inline {
+  --radius-md: calc(var(--radius) - 2px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.145 0 0);
+  --primary: oklch(0.208 0.042 265.755);
+  --primary-foreground: oklch(0.984 0.003 247.858);
+  --accent: oklch(0.968 0.007 247.896);
+  --muted-foreground: oklch(0.505 0 0);
+  --border: oklch(0.9 0 0);
+  --input: oklch(0.929 0.013 255.508);
+}
+
+.dark {
+  --background: oklch(0.16 0 0);
+  --foreground: oklch(0.94 0 0);
+  --primary: oklch(0.94 0 0);
+  --primary-foreground: oklch(0.16 0 0);
+  --accent: oklch(0.24 0 0);
+  --muted-foreground: oklch(0.68 0 0);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 15%);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    transition: background-color 150ms ease, color 150ms ease;
+  }
+
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+@theme {
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+}
+
+@utility subtle-link {
+  color: var(--color-muted-foreground);
+  text-decoration: underline;
+  text-decoration-color: var(--color-border);
+  text-underline-offset: 3px;
+  transition: color 150ms ease, text-decoration-color 150ms ease;
+
+  &:hover,
+  &:focus-visible {
+    color: var(--color-foreground);
+    text-decoration-color: var(--color-muted-foreground);
+  }
+}
