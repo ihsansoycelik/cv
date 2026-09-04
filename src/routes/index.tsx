@@ -113,16 +113,14 @@ function Index() {
           </div>
           <ThemeToggle />
         </div>
-        <p className="mt-2 text-muted-foreground">
-          Istanbul, Türkiye <span className="text-border">•</span>{" "}
+        <p className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-muted-foreground sm:flex-nowrap">
+          <span>Istanbul, Türkiye</span>
           <a className="subtle-link" href="tel:+905353944444">
             +90 535 394 44 44
-          </a>{" "}
-          <span className="text-border">•</span>{" "}
+          </a>
           <a className="subtle-link" href="mailto:contact@soycelik.com">
             contact@soycelik.com
-          </a>{" "}
-          <span className="text-border">•</span>{" "}
+          </a>
           <a
             className="subtle-link"
             href="https://linkedin.com/in/isoycelik"
