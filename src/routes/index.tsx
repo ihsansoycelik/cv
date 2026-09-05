@@ -44,7 +44,9 @@ const experience: Role[] = [
     title: "Brand & Digital Designer",
     company: "Kafka INK Prague",
     dates: "Aug 2024 - Present",
-    bullets: ["Redesigned studio website, improving usability and increasing booking inquiry rate by 40%."],
+    bullets: [
+      "Redesigned studio website, improving usability and increasing booking inquiry rate by 40%.",
+    ],
   },
   {
     title: "Program Producer & Visual Designer",
@@ -58,7 +60,9 @@ const experience: Role[] = [
     title: "Co-founder & Creative Director",
     company: "Reown Agency",
     dates: "Aug 2024 - Jul 2025",
-    bullets: ["Led brand identity and digital content systems for lifestyle, cosmetics, and F&B clients."],
+    bullets: [
+      "Led brand identity and digital content systems for lifestyle, cosmetics, and F&B clients.",
+    ],
   },
   {
     title: "Creative Director (Contract)",
@@ -132,11 +136,11 @@ function Index() {
         </p>
         <p className="mt-6 text-muted-foreground">
           Product Designer with 5+ years of experience in brand, digital product, and visual
-          communication. Leading end-to-end product design for an early-stage startup, with a
-          proven track record in building design systems, UI components, and user flows.
-          Experienced in performance-driven marketing assets for lifestyle, F&amp;B, and
-          multi-location studio clients across Türkiye and Europe. Comfortable working directly
-          with founders, moving fast, and delivering consistent, measurable results.
+          communication. Leading end-to-end product design for an early-stage startup, with a proven
+          track record in building design systems, UI components, and user flows. Experienced in
+          performance-driven marketing assets for lifestyle, F&amp;B, and multi-location studio
+          clients across Türkiye and Europe. Comfortable working directly with founders, moving
+          fast, and delivering consistent, measurable results.
         </p>
       </header>
 
@@ -146,17 +150,16 @@ function Index() {
             {experience.map((role) => (
               <li key={`${role.title}-${role.company}-${role.dates}`} className="p-0">
                 <div className="grid grid-cols-1 items-baseline gap-x-6 sm:grid-cols-[minmax(0,1fr)_auto]">
-                  <h3 className="m-0 min-w-0 font-medium text-foreground">
-                    {role.title} <span className="text-border">•</span> {role.company}
-                  </h3>
+                  <h3 className="m-0 min-w-0 font-medium text-foreground">{role.title}</h3>
                   <span className="mt-0.5 whitespace-nowrap tabular-nums text-muted-foreground sm:mt-0 sm:text-right">
                     {role.dates}
                   </span>
                 </div>
+                <p className="mt-0.5 text-muted-foreground">{role.company}</p>
                 {role.bullets ? (
                   <ul className="mt-2 space-y-2 text-muted-foreground">
                     {role.bullets.map((b) => (
-                      <li key={b} className="pl-4 -indent-4 before:mr-2 before:content-['•']">
+                      <li key={b} className="border-l border-border pl-4">
                         {b}
                       </li>
                     ))}
@@ -174,9 +177,10 @@ function Index() {
                 key={e.school}
                 className="flex flex-col gap-x-4 sm:flex-row sm:items-baseline sm:justify-between"
               >
-                <h3 className="min-w-0 font-medium text-foreground">
-                  {e.school} <span className="text-border">•</span> {e.degree}
-                </h3>
+                <div className="min-w-0">
+                  <h3 className="font-medium text-foreground">{e.school}</h3>
+                  <p className="mt-0.5 text-muted-foreground">{e.degree}</p>
+                </div>
                 {e.dates ? (
                   <span className="mt-0.5 shrink-0 tabular-nums text-muted-foreground sm:mt-0">
                     {e.dates}

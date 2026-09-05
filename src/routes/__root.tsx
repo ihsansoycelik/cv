@@ -68,24 +68,36 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   );
 }
 
+const SITE_URL = "https://cv-2.soycelikihsan.workers.dev";
+
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Ihsan Soycelik",
+  jobTitle: "Product Designer",
+  url: SITE_URL,
+  email: "mailto:contact@soycelik.com",
+  telephone: "+905353944444",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Istanbul",
+    addressCountry: "TR",
+  },
+  sameAs: ["https://linkedin.com/in/isoycelik"],
+};
+
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Ihsan Soycelik — Product Designer" },
-      {
-        name: "description",
-        content: "CV of Ihsan Soycelik, Product Designer in Istanbul, Türkiye.",
-      },
       { name: "author", content: "Ihsan Soycelik" },
-      { property: "og:title", content: "Ihsan Soycelik — Product Designer" },
-      {
-        property: "og:description",
-        content: "CV of Ihsan Soycelik, Product Designer in Istanbul, Türkiye.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
+      { name: "robots", content: "index, follow" },
+      { name: "theme-color", content: "#ffffff" },
+      { property: "og:site_name", content: "Ihsan Soycelik" },
+      { property: "og:url", content: SITE_URL },
+      { property: "og:locale", content: "en_US" },
+      { "script:ld+json": personJsonLd },
     ],
     links: [
       {
@@ -99,6 +111,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Geist:wght@400;500&display=swap",
       },
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "canonical", href: SITE_URL },
     ],
   }),
   shellComponent: RootShell,
@@ -114,7 +127,7 @@ function RootShell({ children }: { children: ReactNode }) {
         <HeadContent />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem('theme');if(!t){t='light'}if(t==='dark'){document.documentElement.classList.add('dark')}document.documentElement.style.colorScheme=t}catch(e){}})();`,
+            __html: `(function(){try{var t=localStorage.getItem('theme');if(!t){t='light'}if(t==='dark'){document.documentElement.classList.add('dark')}document.documentElement.style.colorScheme=t;var m=document.querySelector('meta[name="theme-color"]');if(m){m.setAttribute('content',t==='dark'?'#141414':'#ffffff')}}catch(e){}})();`,
           }}
         />
       </head>
