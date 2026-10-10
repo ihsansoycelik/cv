@@ -1,47 +1,40 @@
 import { useEffect, useState } from "react";
 
-type Theme = "light" | "dark";
+import { ThemeSwitch, type Theme } from "@/components/arc/theme-switch/theme-switch";
 
-function readStoredTheme(): Theme {
-  const stored = localStorage.getItem("theme");
-  return stored === "dark" || stored === "light" ? stored : "light";
+function getStoredTheme(): Theme {
+  try {
+    return localStorage.getItem("theme") === "dark" ? "dark" : "light";
+  } catch {
+    return "light";
+  }
 }
 
 function applyTheme(theme: Theme) {
   document.documentElement.classList.toggle("dark", theme === "dark");
+  document.documentElement.dataset.theme = theme;
   document.documentElement.style.colorScheme = theme;
   document
     .querySelector('meta[name="theme-color"]')
-    ?.setAttribute("content", theme === "dark" ? "#141414" : "#ffffff");
+    ?.setAttribute("content", theme === "dark" ? "oklch(18% 0.009 135)" : "oklch(97.8% 0.008 85)");
 }
 
 export function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>("light");
 
-  // The inline script in src/routes/__root.tsx already painted the DOM with
-  // the stored theme before hydration. useEffect only syncs React state so the
-  // button icon reflects reality on first render after hydration.
   useEffect(() => {
-    setTheme(readStoredTheme());
+    setTheme(getStoredTheme());
   }, []);
 
-  const toggle = () => {
-    const next: Theme = theme === "dark" ? "light" : "dark";
-    setTheme(next);
-    localStorage.setItem("theme", next);
+  const changeTheme = (next: Theme) => {
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      // The active appearance still changes if browser storage is unavailable.
+    }
     applyTheme(next);
+    setTheme(next);
   };
 
-  return (
-    <button
-      type="button"
-      onClick={toggle}
-      aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-      className="text-muted-foreground transition-colors hover:text-foreground focus-visible:text-foreground focus-visible:outline-none focus-visible:underline focus-visible:decoration-current focus-visible:underline-offset-4"
-    >
-      <span aria-hidden="true" className="text-xs">
-        {theme === "dark" ? "☾" : "☀"}
-      </span>
-    </button>
-  );
+  return <ThemeSwitch theme={theme} variant="rise" iconOnly onThemeChange={changeTheme} />;
 }

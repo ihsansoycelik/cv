@@ -5,13 +5,12 @@ import { ThemeToggle } from "@/components/theme-toggle";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Ihsan Soycelik — Product Designer" },
       {
         name: "description",
         content:
           "CV of Ihsan Soycelik, Product Designer in Istanbul, Türkiye, building design systems, UI components, and brand identity for startups and studios.",
       },
-      { property: "og:title", content: "Ihsan Soycelik — Product Designer" },
+      { property: "og:title", content: "Ihsan Soycelik | Product Designer" },
       {
         property: "og:description",
         content:
@@ -95,102 +94,143 @@ const education = [
   { school: "Anadolu University", degree: "Associate Degree", dates: "" },
 ];
 
-function Section({ title, children }: { title: string; children: React.ReactNode }) {
+const sections = [
+  { href: "#about", label: "About" },
+  { href: "#experience", label: "Experience" },
+  { href: "#education", label: "Education" },
+  { href: "#contact", label: "Contact" },
+];
+
+function Section({
+  id,
+  title,
+  index,
+  children,
+}: {
+  id: string;
+  title: string;
+  index: string;
+  children: React.ReactNode;
+}) {
   return (
-    <section className="border-t border-border pt-6">
-      <h2 className="text-xs font-medium uppercase tracking-[0.14em] text-muted-foreground">
-        {title}
-      </h2>
-      <div className="mt-6">{children}</div>
+    <section id={id} className="resume-section scroll-mt-28" aria-labelledby={`${id}-heading`}>
+      <div className="section-heading">
+        <span className="section-index" aria-hidden="true">{index}</span>
+        <h2 id={`${id}-heading`}>{title}</h2>
+      </div>
+      <div className="section-content">{children}</div>
     </section>
   );
 }
 
 function Index() {
   return (
-    <main className="mx-auto w-full max-w-screen-sm px-5 py-16 text-sm leading-relaxed tracking-tight sm:py-24">
-      <header>
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h1 className="font-medium text-foreground">Ihsan Soycelik</h1>
-            <p className="text-muted-foreground">Product Designer</p>
-          </div>
+    <div className="site-shell">
+      <a className="skip-link" href="#main-content">Skip to content</a>
+      <header className="site-header">
+        <a href="#about" className="wordmark" aria-label="Ihsan Soycelik, home">
+          <span className="wordmark-mark" aria-hidden="true">IS</span>
+          <span>Ihsan Soycelik</span>
+        </a>
+        <nav className="primary-nav" aria-label="Page sections">
+          {sections.map((section) => (
+            <a key={section.href} href={section.href}>{section.label}</a>
+          ))}
+        </nav>
+        <div className="header-actions">
           <ThemeToggle />
+          <a className="header-email" href="mailto:contact@soycelik.com">Let’s talk <span aria-hidden="true">↗</span></a>
         </div>
-        <p className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-muted-foreground sm:flex-nowrap">
-          <span>Istanbul, Türkiye</span>
-          <a className="subtle-link" href="tel:+905353944444">
-            +90 535 394 44 44
-          </a>
-          <a className="subtle-link" href="mailto:contact@soycelik.com">
-            contact@soycelik.com
-          </a>
-          <a
-            className="subtle-link"
-            href="https://linkedin.com/in/isoycelik"
-            target="_blank"
-            rel="noreferrer"
-          >
-            linkedin.com/in/isoycelik
-          </a>
-        </p>
-        <p className="mt-6 text-muted-foreground">
-          Product Designer with 5+ years of experience in brand, digital product, and visual
-          communication. Leading end-to-end product design for an early-stage startup, with a proven
-          track record in building design systems, UI components, and user flows. Experienced in
-          performance-driven marketing assets for lifestyle, F&amp;B, and multi-location studio
-          clients across Türkiye and Europe. Comfortable working directly with founders, moving
-          fast, and delivering consistent, measurable results.
-        </p>
       </header>
 
-      <div className="mt-12 space-y-12">
-        <Section title="Experience">
-          <ol className="m-0 flex list-none flex-col gap-8 p-0">
-            {experience.map((role) => (
-              <li key={`${role.title}-${role.company}-${role.dates}`} className="p-0">
-                <div className="grid grid-cols-1 items-baseline gap-x-6 sm:grid-cols-[minmax(0,1fr)_auto]">
-                  <h3 className="m-0 min-w-0 font-medium text-foreground">{role.title}</h3>
-                  <span className="mt-0.5 whitespace-nowrap tabular-nums text-muted-foreground sm:mt-0 sm:text-right">
-                    {role.dates}
-                  </span>
+      <main id="main-content" className="page-content">
+        <section id="about" className="intro-section" aria-labelledby="intro-title">
+
+          <div className="intro-layout">
+            <div className="intro-main">
+              <h1 id="intro-title">Ihsan Soycelik</h1>
+              <p className="intro-subtitle">Product Designer, Istanbul, Türkiye</p>
+              <p className="intro-summary">
+                Product Designer with 5+ years of experience in brand, digital product, and visual
+                communication. Leading end-to-end product design for an early-stage startup, with a proven
+                track record in building design systems, UI components, and user flows. Experienced in
+                performance-driven marketing assets for lifestyle, F&amp;B, and multi-location studio
+                clients across Türkiye and Europe. Comfortable working directly with founders, moving
+                fast, and delivering consistent, measurable results.
+              </p>
+              <div className="intro-actions">
+                <a className="action-link" href="mailto:contact@soycelik.com">
+                  Start a conversation <span aria-hidden="true">↗</span>
+                </a>
+                <a className="text-link" href="#experience">Explore my experience <span aria-hidden="true">↓</span></a>
+              </div>
+            </div>
+            <aside className="profile-card" aria-label="Contact information">
+
+              <a href="mailto:contact@soycelik.com">contact@soycelik.com</a>
+              <a href="tel:+905353944444">+90 535 394 44 44</a>
+              <a href="https://linkedin.com/in/isoycelik" target="_blank" rel="noreferrer">
+                LinkedIn <span aria-hidden="true">↗</span><span className="sr-only"> (opens in a new tab)</span>
+              </a>
+              <p className="profile-location">Based in Istanbul, Türkiye</p>
+            </aside>
+          </div>
+
+        </section>
+
+        <Section id="experience" title="Experience" index="01">
+          <ol className="experience-list">
+            {experience.map((role, position) => (
+              <li key={`${role.title}-${role.company}-${role.dates}`} className="experience-item">
+                <span className="experience-number" aria-hidden="true">{String(position + 1).padStart(2, "0")}</span>
+                <div className="experience-details">
+                  <div className="experience-title-row">
+                    <h3>{role.title}</h3>
+                    <span className="experience-dates">{role.dates}</span>
+                  </div>
+                  <p className="experience-company">{role.company}</p>
+                  {role.bullets ? (
+                    <ul className="experience-notes">
+                      {role.bullets.map((bullet) => <li key={bullet}>{bullet}</li>)}
+                    </ul>
+                  ) : null}
                 </div>
-                <p className="mt-0.5 text-muted-foreground">{role.company}</p>
-                {role.bullets ? (
-                  <ul className="mt-2 space-y-2 text-muted-foreground">
-                    {role.bullets.map((b) => (
-                      <li key={b} className="border-l border-border pl-4">
-                        {b}
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
               </li>
             ))}
           </ol>
         </Section>
 
-        <Section title="Education">
-          <div className="flex flex-col gap-4">
-            {education.map((e) => (
-              <div
-                key={e.school}
-                className="flex flex-col gap-x-4 sm:flex-row sm:items-baseline sm:justify-between"
-              >
-                <div className="min-w-0">
-                  <h3 className="font-medium text-foreground">{e.school}</h3>
-                  <p className="mt-0.5 text-muted-foreground">{e.degree}</p>
+        <Section id="education" title="Education" index="02">
+          <div className="education-list">
+            {education.map((item) => (
+              <article className="education-item" key={item.school}>
+                <div>
+                  <h3>{item.school}</h3>
+                  <p>{item.degree}</p>
                 </div>
-                {e.dates ? (
-                  <span className="mt-0.5 shrink-0 tabular-nums text-muted-foreground sm:mt-0">
-                    {e.dates}
-                  </span>
-                ) : null}
-              </div>
+                {item.dates ? <span className="experience-dates">{item.dates}</span> : null}
+              </article>
             ))}
           </div>
         </Section>
-      </div>
-    </main>
+
+        <section id="contact" className="contact-section scroll-mt-28" aria-labelledby="contact-heading">
+          <div>
+
+            <h2 id="contact-heading">Let’s make something meaningful.</h2>
+          </div>
+          <div className="contact-actions">
+            <a className="action-link action-link-secondary" href="mailto:contact@soycelik.com">
+              Email Ihsan <span aria-hidden="true">↗</span>
+            </a>
+            <a href="tel:+905353944444">Call +90 535 394 44 44</a>
+          </div>
+        </section>
+      </main>
+      <footer className="site-footer">
+        <span>© 2026 Ihsan Soycelik</span>
+        <a href="#main-content">Back to top ↑</a>
+      </footer>
+    </div>
   );
 }
