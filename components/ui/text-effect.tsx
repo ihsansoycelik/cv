@@ -177,7 +177,10 @@ const createVariantsWithTransition = (
 ): Variants => {
   if (!transition) return baseVariants
 
-  const { exit: _, ...mainTransition } = transition
+  // `exit` is a variant transition and must not be spread into the transition
+  // itself; the rest-omit is deliberate, so the unused binding is expected.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const { exit: _exit, ...mainTransition } = transition
 
   return {
     ...baseVariants,

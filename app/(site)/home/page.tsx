@@ -151,8 +151,9 @@ export default function Personal() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {PROJECTS.map((project) => (
             <div key={project.name} className="space-y-2">
-              {/* One stock cover.jpg used to be shown for every project; the
-                  cards are text-only until each project has a real preview. */}
+              {/* One stock cover.jpg used to be shown for every project. Now a
+                  card shows a preview only when the project actually has one. */}
+              {project.video ? <ProjectVideo src={project.video} /> : null}
               <div className="px-1">
                 <a
                   className="font-base group relative inline-block font-[450] text-zinc-900 dark:text-zinc-50"

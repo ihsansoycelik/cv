@@ -46,6 +46,10 @@ export function AnimatedBackground({
     }
   }, [defaultValue])
 
+  // cloneElement merges our props (className, data-checked, handlers) into the
+  // child's own props; the child type is not expressible as one mapped type, and
+  // a too-narrow ReactElement<> makes the build fail on `className`.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return Children.map(children, (child: any, index) => {
     const id = child.props['data-id']
 
